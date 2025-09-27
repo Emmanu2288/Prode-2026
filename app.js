@@ -1,3 +1,11 @@
+// Constructor de pronóstico
+function Pronostico(equipo1, equipo2, golesEquipo1, golesEquipo2) {
+  this.equipo1 = equipo1;
+  this.equipo2 = equipo2;
+  this.golesEquipo1 = golesEquipo1;
+  this.golesEquipo2 = golesEquipo2;
+}
+
 // Constantes y variables
 const partidos = [
     {equipo1: "Argentina", equipo2: "Brasil", golesEquipo1: 3, golesEquipo2: 0},
@@ -8,61 +16,57 @@ const partidos = [
     {equipo1: "Jordania", equipo2: "Australia", golesEquipo1: 0, golesEquipo2: 1},
     {equipo1: "Ecuador", equipo2: "Uruguay", golesEquipo1: 0, golesEquipo2: 0},
     {equipo1: "Colombia", equipo2: "Paraguay", golesEquipo1: 2, golesEquipo2: 0},
+    {equipo1: "Túnez", equipo2: "Marruecos", golesEquipo1: 1, golesEquipo2: 1},
 ];
 
-let aciertosExactos = 0;
 let pronosticos = [];
 
-// Funciones para pedirle los resultados al usuario
-function pedirPronosticos() {
-    for (let i = 0; i < partidos.length; i++) {
-        let partido = partidos[i];
-
-        let golesEquipo1 = parseInt(prompt(`Partido ${i + 1}:\n${partido.equipo1} vs ${partido.equipo2}\nIngresa los goles de ${partido.equipo1}:`));
-        let golesEquipo2 = parseInt(prompt(`Ingresa los goles de ${partido.equipo2}:`));
-
-        // Validacion
-        if (isNaN(golesEquipo1) || isNaN(golesEquipo2)) {
-            alert("Ingresaste un valor inválido. Se registrará como 0 a 0.");
-            golesEquipo1 = 0;
-            golesEquipo2 = 0;
-        }
-        pronosticos.push({golesEquipo1, golesEquipo2});
-    }
-        }
-    // Función para calcular los pronosticos
-    function calcularPronosticos() {
-        for (let i = 0; i < partidos.length; i++) {
-            let real = partidos[i];
-            let usuario = pronosticos[i];
-
-            if (real.golesEquipo1 === usuario.golesEquipo1 && real.golesEquipo2 === usuario.golesEquipo2) {
-                aciertosExactos++;
-                console.log(`✅ Partido ${i + 1}: Acertaste el resultado exacto (${real.golesEquipo1} a ${real.golesEquipo2})`);
-            } else {
-                console.log(`❌ Partido ${i + 1}: No acertaste. Resultado exacto: (${real.golesEquipo1} a ${real.golesEquipo2})`);
-            }
-        }
-    }
-
-// Función para mostrar el resultado final
-function mostrarResultadoFinal() {
-    alert(`Tuviste ${aciertosExactos} aciertos exactos de ${partidos.length} partidos.`);
-    console.log("Pronósticos ingresados:", pronosticos);
-    console.log("Total de aciertos exactos:", aciertosExactos);
+// Cargar pronósticos guardados
+if (localStorage.getItem("pronosticos")) {
+  pronosticos = JSON.parse(localStorage.getItem("pronosticos"));
 }
 
-//Funcion principal
-function iniciarSimulacion() {
-    let iniciar = confirm("¿Deseas ingresar tus pronósticos para los partidos?");
-    if (iniciar) {
-        pedirPronosticos();
-        calcularPronosticos();
-        mostrarResultadoFinal();
-    } else {
-        alert("Simulación cancelada.");
-    }
-}
+// Generar formulario dinámico
+const form = document.getElementById("formPronosticos");
+partidos.forEach((partido, index) => {
+  const div = document.createElement("div");
+  div.innerHTML = `
+    <label>${partido.equipo1} vs ${partido.equipo2}</label><br>
+    <input type="number" min="0" id="g1-${index}" placeholder="Goles de ${partido.equipo1}">
+    <input type="number" min="0" id="g2-${index}" placeholder="Goles de ${partido.equipo2}">
+    <hr>
+  `;
+  form.appendChild(div);
+});
 
-//Ejecutar la simulación
-iniciarSimulacion();
+// Calcular aciertos
+document.getElementById("btnCalcular").addEventListener("click", () => {
+  pronosticos = []; // Reiniciar
+  let aciertosExactos = 0;
+
+  partidos.forEach((partido, index) => {
+    const goles1 = parseInt(document.getElementById(`g1-${index}`).value);
+    const goles2 = parseInt(document.getElementById(`g2-${index}`).value);
+
+    const pronostico = new Pronostico(partido.equipo1, partido.equipo2, goles1 || 0, goles2 || 0);
+    pronosticos.push(pronostico);
+
+    if (goles1 === partido.golesEquipo1 && goles2 === partido.golesEquipo2) {
+      aciertosExactos++;
+    }
+  });
+
+  // Guardar en localStorage
+  localStorage.setItem("pronosticos", JSON.stringify(pronosticos));
+
+  // Mostrar resultados
+  const resultadosDiv = document.getElementById("resultados");
+  resultadosDiv.innerHTML = `<p>Tuviste ${aciertosExactos} aciertos exactos de ${partidos.length} partidos.</p>`;
+
+  pronosticos.forEach((p, i) => {
+    const real = partidos[i];
+    const resultado = document.createElement("p");
+    resultado.textContent = `${p.equipo1} ${p.golesEquipo1} - ${p.equipo2} ${p.golesEquipo2} | Resultado real: ${real.golesEquipo1} - ${real.golesEquipo2}`;
+    resultadosDiv.appendChild(resultado);
+  });
+});
