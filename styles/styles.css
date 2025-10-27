@@ -1,0 +1,100 @@
+/* -- Reset Basico -- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* -- Logo del mundial -- */
+.logo {
+  width: 60px;
+  height: 55px;
+}
+/* -- Navbar -- */
+.bg-navbar-prode {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 40, 104, 1) 0%,
+    rgba(0, 104, 71, 1) 50%,
+    rgba(255, 0, 0, 1) 100%
+  );
+}
+
+.navbar-brand {
+  font-family: "Bangers", cursive;
+  font-size: 1.8rem;
+  color: white !important;
+}
+
+/* -- Body -- */
+body {
+  background-color: #f0f4f8;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* -- Titulo con animacion -- */
+h1 {
+  text-align: center;
+  color: #007b5a;
+  animation: rebote 2s infinite;
+  margin-top: 20px;
+}
+@keyframes rebote {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* -- Contenedor de partidos -- */
+.partido {
+  transition: all 0.4s ease;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.partido:nth-child(even) {
+  background-color: #ffffff;
+}
+.partido:nth-child(odd) {
+  background-color: #e6f2ff;
+}
+/* -- Estilos de inputs y botones -- */
+.input-goles {
+  width: 120px;
+  margin-right: 10px;
+}
+.input-goles:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 5px #ffd700;
+}
+.icono-pelota {
+  font-size: 1.2em;
+  margin-right: 5px;
+}
+#btnCalcular {
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.acierto {
+  border: 2px solid #28a745;
+}
+.fallo {
+  border: 2px solid #dc3545;
+}
+/* -- Estilos de banderas -- */
+img {
+  border-radius: 3px;
+  vertical-align: middle;
+}

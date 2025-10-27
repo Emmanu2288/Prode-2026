@@ -1,0 +1,16 @@
+[
+  { "equipo1": "Argentina", "equipo2": "Brasil", "golesEquipo1": 3, "golesEquipo2": 0 },
+  { "equipo1": "Estados Unidos", "equipo2": "Canadá", "golesEquipo1": 1, "golesEquipo2": 0 },
+  { "equipo1": "México", "equipo2": "Japón", "golesEquipo1": 2, "golesEquipo2": 2 },
+  { "equipo1": "Nueva Zelanda", "equipo2": "Irán", "golesEquipo1": 1, "golesEquipo2": 0 },
+  { "equipo1": "Uzbekistán", "equipo2": "Corea del Sur", "golesEquipo1": 1, "golesEquipo2": 2 },
+  { "equipo1": "Jordania", "equipo2": "Australia", "golesEquipo1": 0, "golesEquipo2": 1 },
+  { "equipo1": "Ecuador", "equipo2": "Uruguay", "golesEquipo1": 2, "golesEquipo2": 2 },
+  { "equipo1": "Colombia", "equipo2": "Paraguay", "golesEquipo1": 2, "golesEquipo2": 0 },
+  { "equipo1": "Túnez", "equipo2": "Marruecos", "golesEquipo1": 1, "golesEquipo2": 1 },
+  { "equipo1": "Egipto", "equipo2": "Argelia", "golesEquipo1": 0, "golesEquipo2": 1 },
+  { "equipo1": "Ghana", "equipo2": "Cabo Verde", "golesEquipo1": 1, "golesEquipo2": 1 },
+  { "equipo1": "Sudáfrica", "equipo2": "Catar", "golesEquipo1": 0, "golesEquipo2": 1 },
+  { "equipo1": "Arabia Saudita", "equipo2": "Inglaterra", "golesEquipo1": 0, "golesEquipo2": 3 },
+  { "equipo1": "Costa de Marfil", "equipo2": "Senegal", "golesEquipo1": 2, "golesEquipo2": 1 }
+]
